@@ -22,3 +22,4 @@ python-dotenv
 django-heroku
 dj-database-url
 jinja2
+psycopg2-binary
