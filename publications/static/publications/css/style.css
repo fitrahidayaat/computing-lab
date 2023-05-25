@@ -1,0 +1,28 @@
+section#top-section {
+  background: url(../img/bg-top.png) no-repeat bottom center;
+  padding-bottom: 200px;
+  margin-bottom: 0px;
+}
+
+section#publications{
+  padding: 0px;
+  margin-top: 0px;
+}
+
+@media (max-width: 768px){
+  section#top-section{
+    display: none;
+  }
+  section#publications{
+    margin-top: 100px;
+    margin-bottom: 50px;
+  }
+  
+}
+
+.page-item.active .page-link {
+  background-color: var(--warning) !important;
+  border-color: var(--warning) !important;
+  color: var(--dark) !important;
+  font-weight: bold;
+}

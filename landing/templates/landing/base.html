@@ -1,0 +1,142 @@
+{% load static %}
+
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0">
+    <meta name="description" content="Computing Laboratory Telkom University">
+    <meta name="author" content="Maxalmina Satria Kahfi">
+    
+    <!-- Title Page -->
+    <title>{{title}}</title>
+
+    <!-- Icon Page -->
+    <link rel="icon" href="{% static 'landing/img/favicon.png' %}">
+
+    <!-- Custom Google Web Font -->
+    <link href='http://fonts.googleapis.com/css?family=Lato:100,300,400,700,900,100italic,300italic,400italic,700italic,900italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Arvo:400,700' rel='stylesheet' type='text/css'>
+    <link type="text/css" href="//fonts.googleapis.com/css?family=Raleway" rel="stylesheet" />
+    <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro' rel='stylesheet' type='text/css'>
+
+    <!-- Material Design icon font -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <!-- Custom CSS -->
+    {% block css %}{% endblock %}
+    <link rel="stylesheet" href="{% static 'landing/css/base.css' %}" type="text/css">
+</head>
+<body>
+    <!-- navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
+      <div class="container">
+        <a class="navbar-brand js-scroll-trigger" href="{% url ''%}"><b>COMPUTING</b> LABORATORY</a>
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+          <i class="fas fa-bars"></i>
+        </button>
+        <div class="collapse navbar-collapse text-center" id="navbarResponsive">
+          <ul class="navbar-nav text-uppercase ml-auto">
+            <li class="nav-item">
+              <a class="nav-link js-scroll-trigger" href="{% url 'laboratory'%}">Laboratory</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link js-scroll-trigger" href="{% url 'products'%}">Products</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link js-scroll-trigger" href="{% url 'achievements'%}">Achievements</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link js-scroll-trigger" href="{% url 'publications'%}">Publications</a>
+            </li>
+          </ul>
+          <a class="btn btn-warning navbar-btn" href="{% url 'recruitment'%}">Recruitment 7.0</a>
+        </div>
+      </div>
+    </nav>
+    
+    <!-- content here -->
+    {% block content %}
+    {% endblock %}
+    
+    <!-- footer -->
+    <footer class="page-footer">
+      <div class="container">
+        <!-- Grid row -->
+        <div class="row">
+          <div class="col-md-3 text-left">
+            <h3>computing laboratory</h3>
+          </div>
+          <div class="col-md-3">
+            <h6 class="text-uppercase">Location</h6>
+            <ul class="list-unstyled">
+              <li>
+                <a target="_blank" href="https://www.google.com/maps/place/Computing+Laboratory,+School+of+Computing,+Telkom+University/@-6.9762464,107.6309415,18z/data=!4m8!1m2!2m1!1sLaboratory!3m4!1s0x2e68e9afb2fa8a7f:0x7ecd36e1fca92d30!8m2!3d-6.9764621!4d107.6312941">
+                  Ruang IF2.01.01, Gedung Kultubai Utara, Fakultas Informatika, Telkom University Jalan Telekomunikasi Terusan Buah Batu Bandung 40257 Indonesia
+                </a>
+              </li>
+            </ul>
+          </div>
+          <div class="col-md-3">
+            <h6 class="text-uppercase">University</h6>
+            <ul class="list-unstyled">
+              <li>
+                <a target="_blank" href="https://telkomuniversity.ac.id/">Telkom University</a>
+              </li>
+              <li>
+                <a target="_blank" href="https://soc.telkomuniversity.ac.id/">School of Computing</a>
+              </li>
+              <li>
+                <a target="_blank" href="http://bif.telkomuniversity.ac.id/">Bachelor of Informatics</a>
+              </li>
+            </ul>
+          </div>
+          <div class="col-md-3">
+            <h6 class="text-uppercase">Social Media</h6>
+            <ul class="list-inline social-buttons">
+              <li class="list-inline-item">
+                <a target="_blank" href="https://github.com/ComputingTelU">
+                  <i class="fab fa-github"></i>
+                </a>
+              </li>
+              <li class="list-inline-item">
+                <a target="_blank" href="http://line.me/ti/p/~@hie4203s">
+                  <i class="fab fa-line"></i>
+                </a>
+              </li>
+              <li class="list-inline-item">
+                <a target="_blank" href="https://www.instagram.com/computinglab/">
+                  <i class="fab fa-instagram"></i>
+                </a>
+              </li>
+              <li class="list-inline-item">
+                <a target="_blank" href="https://www.facebook.com/telkomuniversity.computing.lab/">
+                  <i class="fab fa-facebook-square"></i>
+                </a>
+              </li>
+              <li class="list-inline-item">
+                <a target="_blank" href="https://www.youtube.com/c/computinglab">
+                  <i class="fab fa-youtube"></i>
+                </a>
+              </li>
+            </ul>
+            <ul class="list-unstyled">
+                <li class="list-inline-item">
+                  <p style="color: whitesmoke; font-style:italic">computing@telkomuniversity.ac.id</p>
+                </li>
+              </ul>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script> -->
+    <script src="{% static 'landing/js/agency.min.js' %}"></script>
+    <!-- Custom Script -->
+    {% block js %}{% endblock %}
+</body>
+</html>

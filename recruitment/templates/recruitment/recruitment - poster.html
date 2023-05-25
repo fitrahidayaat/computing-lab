@@ -1,0 +1,98 @@
+{% extends 'landing/base.html' %} 
+{% load static %}
+
+{% block css %}
+    <link rel="stylesheet" href="{% static 'recruitment/css/style.css' %}" type="text/css">
+{% endblock %}
+
+{% block js %}
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+<script>
+    MathJax = {
+        tex: {inlineMath: [['$', '$'], ['\\(', '\\)']]}
+    };
+</script>
+<script>
+$(function() {
+    var request;
+
+    $(".custom-file-input").on("change", function() {
+        var fileName = $(this).val().split("\\").pop();
+        $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+    });
+    
+    
+    $("form").submit(function(event) {
+        event.preventDefault();
+        if (request) {
+            request.abort();
+        }
+        
+        var inputs = $(this).find("input, select, button, textarea");
+        inputs.prop("disabled", true);
+        
+        var formData = new FormData();
+        formData.append("nim", document.getElementsByName("nim")[0].value);
+        formData.append("problem", document.getElementsByName("problem")[0].value);
+        formData.append("solution", $(document.getElementsByName("solution")[0]).prop("files")[0]);
+
+        request = $.ajax({
+            url: "http://ilmyyy.000webhostapp.com/UploadPython.php",
+            type: "POST",
+            data: formData,
+            dataType: "json",
+            cache: false,
+            contentType: false,
+            processData: false
+        });
+        
+        alert("Sedang memeriksa jawaban kamu, mohon tunggu sampai selesai!");
+
+        request.done(function (response, textStatus, jqXHR) {
+            if (response.message == "WA") {
+                alert("Jawaban kamu salah!");
+            } else if (response.message == "RTE") {
+                alert("Jawaban kamu error!");
+            } else {
+                var hasil = response.message.replace(/\\n/g,"\n");
+                alert(hasil);
+            }
+        });
+
+        request.fail(function (jqXHR, textStatus, errorThrown) {
+            console.error("The following error occurred: " +textStatus, errorThrown);
+        });
+        
+        request.always(function () {
+            inputs.prop("disabled", false);
+        });
+    });
+});
+</script>
+{% endblock %}
+
+{% block content %}
+    <section id="top-section">
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <h2 class="section-heading text-uppercase">Let's Join Computing Laboratory Gen 7.0!</h2>
+                <h3 class="section-subheading">See the poster below for details</h3>
+            </div>
+        </div>
+    </section>
+
+    <section id="portfolio">
+        <div class="row">
+            <div class="col-6 mx-auto">
+                <div class="card">
+                    <div class="card-body">
+                        <img class="img-fluid d-block mx-auto" src="{% static 'recruitment/img/Poster-Oprec.png' %}">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    
+{% endblock %}

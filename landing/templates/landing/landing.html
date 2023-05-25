@@ -1,0 +1,240 @@
+{% extends 'landing/base.html' %} 
+{% load static %}
+
+{% block css %}
+    <link rel="stylesheet" href="{% static 'landing/css/style.css' %}" type="text/css">
+{% endblock %}
+
+{% block content %}
+    <section id="top-section">
+        <div class="container">
+            <div class="row d-flex align-items-right">
+                <div class="col-md-7">
+                    <h2 class="section-heading">
+                        Place to Learn<br>
+                        Part to Grow
+                    </h2>
+                    <h3 class="section-subheading">Improve and develop knowledge
+                        and skills of Informatics students.</h3>
+                    <button class="btn btn-outline-warning js-scroll-trigger" onclick="window.location.href='#wedo'">Explore more</button>
+                </div>
+                <div class="col-md-5">
+                    <img class="img-fluid" src="{% static 'landing/img/edu-iso.png'%}" style="width: 80%">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!--what we do-->
+    <section id="wedo">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <h1 class="section-heading text-uppercase">What We Do</h1>
+                    <h3 class="section-subheading text-muted">to empower resources in the lab and to support research programs
+                        carried out by lecturers of School of Computing, Telkom University.</h3>
+                </div>
+            </div>
+            <div class="row align-self-center">
+                <div class="col-md-12 text-center">
+                    <img src="{% static 'landing/img/logo-1.png' %}">
+                </div>
+            </div>
+            <div class="row" style="padding-top: 30px;">
+                <div class="col-lg-12 text-center">
+                    <button class="btn btn-warning btn-lg js-scroll-trigger" data-toggle="modal" data-target="#calendar">Calendar</button>
+                    <button class="btn btn-warning btn-lg js-scroll-trigger" data-toggle="modal" data-target="#rules">Inventory Rules</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!--calendar-->
+    <div class="modal fade" id="calendar" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLongTitle">Calendar</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <iframe 
+                src="https://calendar.google.com/calendar/embed?showTitle=0&amp;showPrint=0&amp;showTabs=0&amp;showCalendars=0&amp;height=600&amp;wkst=1&amp;bgcolor=%23FFFFFF&amp;src=pu1oececs9nnvapa3ffu6cbodg%40group.calendar.google.com&amp;color=%23333333&amp;src=b556b177p9qmcmgsb2ep7t15r0%40group.calendar.google.com&amp;color=%23865A5A&amp;ctz=Asia%2FJakarta" style="border-width:0" width="100%" height="100%" frameborder="0" scrolling="no">
+            </iframe>
+        </div>
+        </div>
+    </div>
+    </div>
+
+    <!--rules-->
+    <div class="modal fade" id="ruleas" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <img src="{% static 'landing/img/peraturan.jpg' %}" alt="" width="100%">
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="rules" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLongTitle">Inventory Rules</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <img src="{% static 'landing/img/peraturan.jpg' %}" alt="" width="100%">
+        </div>
+        </div>
+    </div>
+    </div>
+    
+    <!-- SG Basic -->
+    <section id="sgbasic">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 text-center">
+                    <h2 class="section-heading text-uppercase">Study Group Basic</h2>
+                    <h3 class="section-subheading text-muted">this activity will focus on algorithms and basic programming for first-year / second-year School of Computing students</h3>
+                </div>
+            </div>
+            <div class="row text-center">
+                {% for topic in basic %}
+                <div class="col-md-6 center">
+                    <div class="card">
+                        <div class="card-body">
+                            <img src="{{topic.icon.url}}" style="width: 40%;">
+                            <h5 class="card-title">---</h5>
+                            <h6 class="card-subtitle mb-2 text-muted">{{topic.name}}</h6>
+                            <p class="card-text">{{topic.description}}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+
+    <!-- SG Advance -->
+    <section class="bg-light" id="portfolio">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 text-center">
+                    <h2 class="section-heading text-uppercase">Study Group Advance</h2>
+                    <h3 class="section-subheading text-muted">the advanced level of the Study Group. Group 
+                    discussion of members is the main differences
+                    between the Study Group Advance and the Study Group.
+                    </h3>
+                </div>
+            </div>
+            <div class="row">
+                {% for topic in advance %}
+                <div class="col-md-4 col-sm-4 portfolio-item">
+                    <a class="portfolio-link" data-toggle="modal" href="#{{topic.id}}" style="text-decoration:none">
+                        <div class="portfolio-caption">
+                            <img class="img-fluid d-block mx-auto" src="{{topic.icon.url}}" alt="" style="height: 80px;">
+                            <hr>
+                            <p class="text-muted">{{topic.name}}</p>
+                        </div>
+                    </a>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+
+    {% for topic in advance %}
+
+    <!--Modal-->
+    <div class="modal fade" id="{{topic.id}}" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="container">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLongTitle">{{ topic.name}}</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-10 mx-auto">
+                            <div class="modal-body">
+                                <!-- Project Details Go Here -->
+                                <div class="portfolio-caption">
+                                    <p class="text-muted text-center font-italic">{{topic.description}}</p>
+                                </div>
+                                <span class="fa fa-user"></span> : <span class="text-muted">{{topic.tutor}}</span>
+                                <br>
+                                <span class="fa fa-clock"></span> : <span class="text-muted">{{topic.time}}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endfor %}  
+
+
+    <!-- pelatihan -->
+    <section id="pelatihan">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 text-center">
+                    <h2 class="section-heading text-uppercase">Training</h2>
+                    <h3 class="section-subheading text-muted">a training that can be followed by Telkom University students</h3>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="python">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-5"></div>
+                <div class="col-md-7">
+                    <img src="{% static 'landing/img/python.png' %}" alt="" style="width: 100px;">
+                    <h4 class="service-heading">Python Training</h4>
+                    <p class="text-muted">Python programming language training for Telkom University students, especially School of Computing's students</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="latex"> 
+        <div class="container">
+            <div class="row">
+                <div class="col-md-7">
+                    <img src="{% static 'landing/img/latex.png' %}" alt="" style="width: 200px;">
+                    <h4 class="service-heading">LaTeX Training</h4>
+                    <p class="text-muted">Intended for Telkom University students who are taking a final project I (seminar & proposal) course.</p>
+                </div>
+                <div class="col-md-5"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- responsi -->
+    <section id="responsi">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 text-center">
+                    <h2 class="section-heading text-uppercase">Response </h2>
+                    <h3 class="section-subheading text-muted">additional class in certain course for School of Computing students</h3>
+                </div>
+            </div>
+            <div class="row align-self-center">
+                <div class="col-md-12 text-center">
+                    <img src="{% static 'landing/img/responsi.png' %}">
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}
+
+{% block js %}
+{% endblock %}

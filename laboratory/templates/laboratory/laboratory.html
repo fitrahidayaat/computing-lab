@@ -1,0 +1,267 @@
+{% extends 'landing/base.html' %} 
+{% load static %}
+
+{% block css %}
+    <link rel="stylesheet" href="{% static 'aboutus/css/style.css' %}" type="text/css">
+{% endblock %}
+
+{% block content %}
+    <section id="top-sectionl">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <h2 class="section-heading"> Place to Learn </h2>
+                    <h3 class="section-subheading">Comfortable place to learn with best students</h3>
+                    <img src="{% static 'aboutus/img/Gen5.jpg' %}" style="width: 90%;">                    
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="desc">
+        <div class="container">
+            <div class="row d-flex align-items-center">
+                <div class="col-md-6">
+                    <img class="img-fluid d-block mx-auto" src="{% static 'aboutus/img/computing1.png' %}" style="width: 80%;">
+                </div>
+                <div class="col-md-6">
+                    <h2 class="section-heading text-uppercase">Computing Laboratory</h2>
+                    <h3 class="section-subheading text-muted" style="margin-bottom: 30px">
+                        Since 2014 under Intelligence, Computing, Multimedia (ICM) expertise group, School of Computing, Telkom University this laboratory held any
+                        academic events to improve and develop skills of School of Computing, Telkom University</h3>
+                    <button class="btn btn-warning js-scroll-trigger" data-toggle="modal" data-target="#read">Read More</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="modal fade" id="read" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="read">Computing Laboratory</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <h6>Vision</h6>
+                    <p> To be a laboratory that improve knowledge in algorithm and programming for either members or non members.
+                    And also able to empower resources in the laboratory to support research programs conducted by School of Computing, Telkom University lecturers.
+                    </p>
+                    <h6>Mission</h6>
+                    <ol>
+                        <li>Organizing learning routinely for laboratory's members also provides assignments as a form of practice from the material
+                            that has been taught.</li>
+                        <li>Preparing all available resources in the laboratory to help the lecturer research, 
+                            especially lecturers at ICM expertise group, School of Computing, Telkom University.</li>
+                        <li>Maintaining relationships between laboratory members and maintaining comfort & conducive atmosphere in the
+                            laboratory that can increases the productivity of members and visitors of the laboratory.</li>
+                    </ol>
+
+                    <h6>History</h6>
+                    <p>The ICM expertise group at that time there were only Artificial Intelligence laboratory and Multimedia laboratory,
+                        so to complement the needs of the ICM expertise group, Computing laboratory were established, expected to handle fields that could not be 
+                        handled by laboratories that already exists, such as cryptography, formal methods, bio-inspired computing, and others.</p>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Our Teams -->
+    <section id="team">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 text-center">
+                    <h2 class="section-heading text-uppercase">Our Amazing Team</h2>
+                    <h3 class="section-subheading text-muted">our supervisor and laboratory assistant</h3>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="team-member">
+                       {% if head.photo %}
+                        <img class="mx-auto rounded-circle" src="{{ head.photo.url }}" width="220px">
+                        {% else %}
+                        <span class="fa fa-user fa-3x bg-light text-center mx-auto rounded-circle" style="width:220px; height:220px; margin-bottom:5px; padding-top:90px; border-radius:100%"></span>
+                        {% endif %}
+                         {% if head.linkedin %}
+                        <a style="text-decoration:none" href="{{head.linkedin}}"><h5 class="text-dark">{{ head.name }}</h5></a>
+                        {% else %}
+                        <h5 class="text-dark">{{ head.name }}</h5>
+                        {% endif %}
+                        <p class="text-muted">{{head.description}} </p>
+                    </div>
+                </div>
+            </div>
+            <div class="row justify-content-md-center">
+                {% for assistant in assistants %}
+                <div class="col-sm-3">
+                    <div class="team-member">
+                        {% if assistant.photo %}
+                        <img class="mx-auto rounded-circle" src="{{ assistant.photo.url }}" width="220px">
+                        {% else %}
+                        <span class="fa fa-user fa-3x bg-light text-center mx-auto rounded-circle" style="width:220px; height:220px; margin-bottom:5px; padding-top:90px; border-radius:100%"></span>
+                        {% endif %}
+                        {% comment %} <img class="mx-auto rounded-circle" src="{{ assistant.photo.url }}" alt=""> {% endcomment %}
+                        {% if assistant.linkedin %}
+                        <a style="text-decoration:none" href="{{assistant.linkedin}}"><h5 class="text-dark">{{ assistant.name }}</h5></a>
+                        {% else %}
+                        <h5 class="text-dark">{{ assistant.name }}</h5>
+                        {% endif %}
+                        <p class="text-muted">{{ assistant.description }}</p>
+                    </div>
+                </div>
+                {% endfor %}
+            
+        </div>
+    </section>
+    
+    <section id="ach" class="bg-light">
+        <div class="container ">
+            <div class="row">
+                <div class="col-md-12 text-center">
+                    <h2 class="section-heading text-uppercase">Our Members</h2>
+                    <h3 class="section-subheading text-muted">here are our outstanding members</h3>
+                </div>
+            </div>
+
+            <ul class="nav nav-tabs">
+                {% for generation in generations  %}
+                    {% if generation.name == gen %}
+                        <li class="nav-item">
+                            <a class="nav-link text-dark  active" data-toggle="pill" href="#{{generation.id}}">
+                                Gen {{generation.name}}
+                            </a>
+                        </li>
+                    {% else %}
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" data-toggle="pill" href="#{{generation.id}}">
+                                Gen {{generation.name}}
+                            </a>
+                        </li>
+                    {% endif %}
+                {% endfor %}
+            </ul>
+
+            <div class="tab-content">
+                {% for generation in generations  %}
+                    {% if generation.name == gen %}
+                       <div class="tab-pane container active" id="{{generation.id}}">
+                            <div id="portfolio" style="margin-top:50px">
+                                <div class="container">
+                                    <div class="row">
+                                        {% for member in members %}
+                                            {% if member.generation == generation.name %}
+                                            <div class="col-md-4 col-sm-4 portfolio-item">
+                                                <div class="portfolio-caption text-left">
+                                                    <div class="row">
+                                                        <div class="col-md-3">
+                                                            {% if member.photo %}
+                                                            <img class="mx-auto rounded-circle" src="{{ member.photo.url }}" width="68px">
+                                                            {% else %}
+                                                            <span class="fa fa-user bg-light text-center" style="width:68px; height:68px; padding-top:28px;border-radius:100%"></span>
+                                                            {% endif %}
+                                                            {% comment %}                                                             
+                                                            {% if member.role == "assistant" %}
+                                                            <span class="badge badge-pill bg-warning" style="margin-top:-15px">assistant</span>
+                                                            {% elif member.role == "former" %}
+                                                            <span class="badge badge-pill bg-info text-white" style="margin-top:-15px">graduated</span>
+                                                            {% endif %} 
+                                                            {% endcomment %}
+                                                        </div>
+                                                        <div class="col-md-9" style="margin-top:10px">
+                                                            {% if member.linkedin %}
+                                                            <a style="text-decoration:none" href="{{member.linkedin}}"><h6 class="text-dark">{{ member.name }}</h6></a>
+                                                            {% else %}
+                                                            <h6>{{ member.name }}</h6>
+                                                            {% endif %}
+                                                            <span class="badge badge-pill text-muted">{{member.department}}, {{member.student_year}}</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            {% endif %}
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {% else %}
+                        <div class="tab-pane container fade" id="{{generation.id}}">
+                            <div id="portfolio" style="margin-top:50px">
+                                <div class="container">
+                                    <div class="row">
+                                        {% for member in members %}
+                                            {% if member.generation == generation.name %}
+                                            <div class="col-md-4 col-sm-4 portfolio-item">
+                                                <div class="portfolio-caption text-left">
+                                                    <div class="row">
+                                                        <div class="col-md-3">
+                                                            {% if member.photo %}
+                                                            <img class="mx-auto rounded-circle" src="{{ member.photo.url }}" width="68px">
+                                                            {% else %}
+                                                            <span class="fa fa-user bg-light text-center" style="width:68px; height:68px; padding-top:28px;border-radius:100%"></span>
+                                                            {% endif %}
+                                                            {% comment %} 
+                                                            {% if member.role == "assistant" %}
+                                                            <span class="badge badge-pill bg-warning" style="margin-top:-15px">assistant</span>
+                                                            {% elif member.role == "former" %}
+                                                            <span class="badge badge-pill bg-info text-white" style="margin-top:-15px">graduated</span>
+                                                            {% endif %} 
+                                                            {% endcomment %}
+                                                        </div>
+                                                        <div class="col-md-9" style="margin-top:10px">
+                                                            {% if member.linkedin %}
+                                                            <a style="text-decoration:none" href="{{member.linkedin}}"><h6 class="text-dark">{{ member.name }}</h6></a>
+                                                            {% else %}
+                                                            <h6 class="text-dark">{{ member.name }}</h6>
+                                                            {% endif %}
+                                                            <span class="badge badge-pill text-muted">{{member.department}}, {{member.student_year}}</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            {% endif %}
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+
+    <section class="py-5">
+        <div class="container ">
+            <div class="row">
+                {% for topic in topics%}
+                {% if topic.status == 'active' %}
+                <div class="col-md-3" style="margin-bottom:30px">
+                    <img class="img-fluid d-block mx-auto" src="{{topic.icon.url}}" alt="{{topic.name}}"  style="width:200px;">
+                </div>
+                {% else %}
+                <div class="col-md-3" style="margin-bottom:30px">
+                    <img class="img-fluid d-block mx-auto" src="{{topic.icon.url}}" alt="{{topic.name}}"  style="width:200px;filter: gray;-webkit-filter: grayscale(1);filter: grayscale(1);">
+                </div>
+                {% endif %}
+                {% endfor %}
+            </div>
+            <div class="row">
+                <div class="col-lg-10 mx-auto text-center">
+                    <h5 class="large text-muted">Computer science is no more about computers than astronomy is about telescope <br> - Edsger Dijkstra - </h5>
+                </div>
+            </div>
+        </div>
+    </section>
+  
+{% endblock %}
+
+{% block js %}
+{% endblock %}

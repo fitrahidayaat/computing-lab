@@ -1,0 +1,199 @@
+table#playboard{
+    background-color: black;
+}
+
+.container{
+    display: grid;
+    justify-content: center;
+}
+
+div.cell{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(245, 245, 245);
+    width: 60px;
+    height: 60px;
+}
+
+div.cell:hover{
+    background-color: lightgray;
+}
+
+.empty{
+    border-radius: 50%;
+    background-color: transparent;
+    border-color: transparent;
+    width: 55px;
+    height: 55px;
+    font-size: 0;
+}
+
+.emptySolve{
+    border-radius: 50%;
+    background-color: transparent;
+    border-color: transparent;
+    width: 55px;
+    height: 55px;
+    font-size: 0;
+}
+
+.empty:hover {
+    border-color: #888;
+    border-style: dashed;
+    border-width: 3px;
+}
+
+.black{
+    border-radius: 50%;
+    background-color: black;
+    border-color: white;
+    border-style: solid;
+    border-width: 3px;
+    width: 55px;
+    height: 55px;
+    font-size: 0;
+}
+
+.blackSolve{
+    border-radius: 50%;
+    background-color: black;
+    border-color: white;
+    border-style: dashed;
+    border-width: 3px;
+    width: 55px;
+    height: 55px;
+    font-size: 0;
+}
+
+.white{
+    border-radius: 50%;
+    background-color: white;
+    border-color: black;
+    border-style: solid;
+    border-width: 3px;
+    width: 55px;
+    height: 55px;
+    font-size: 0;
+}
+
+.whiteSolve{
+    border-radius: 50%;
+    background-color: white;
+    border-color: black;
+    border-style: dashed;
+    border-width: 3px;
+    width: 55px;
+    height: 55px;
+    font-size: 0;
+}
+
+.rowColumnHandler{
+    text-align: center; 
+}
+
+.counter{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 6pt;
+    background-color: lightblue;
+    width: 70px;
+    height: 55px;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    font-size: 30pt;
+}
+
+.counterDisplay {
+    background-color: transparent;
+    border-color: transparent;
+    width: 60px;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    font-size: 30pt;
+}
+
+.rowColButton {
+    background-color: lightgray;
+    border-color: transparent;
+    border-radius: 6pt;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    width: 35px;
+    height: 55px;
+}
+
+.rowColButton:hover {
+    background-color: #AAA;
+}
+
+.rowColButton:active {
+    background-color: #555;
+    color: #AAA;
+}
+
+.optionButton {
+    margin-top: 10px;
+    background-color: rgb(255, 39, 39);
+    border-color: transparent;
+    border-radius: 6pt;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    width: 70px;
+    height: 35px;
+}
+
+.optionButton:hover {
+    background-color: rgb(167, 25, 25);
+}
+
+.optionButton:active {
+    background-color: rgb(95, 14, 14);
+    color: rgb(255, 39, 39);
+}
+
+.buildButton {
+    margin-top: 10px;
+    background-color: lightgray;
+    border-color: transparent;
+    border-radius: 6pt;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    font-size: small;
+    width: 70px;
+    height: 40px;
+}
+
+.buildButton:hover {
+    background-color: #AAA;
+}
+
+.buildButton:active {
+    background-color: #555;
+    color: #AAA;
+}
+
+.submitButton {
+    margin-top: 10px;
+    background-color: rgb(139, 211, 31);
+    border-color: transparent;
+    border-radius: 6pt;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    width: 70px;
+    height: 35px;
+}
+
+.submitButton:hover {
+    background-color: rgb(111, 166, 27);
+}
+
+.submitButton:active {
+    background-color: rgb(68, 105, 12);
+    color: rgb(139, 211, 31);
+}
+
+h2.false{
+    color: #D00;
+    text-shadow: 0 0 1px black, 0 0 1px black, 0 0 1px black, 0 0 1px black;
+}
+
+h2.true{
+    color: #0D0;
+    text-shadow: 0 0 1px black, 0 0 1px black, 0 0 1px black, 0 0 1px black;
+}

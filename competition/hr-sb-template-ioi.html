@@ -1,0 +1,138 @@
+{% raw %}
+{% load static %}
+{% endraw %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset = "utf-8">
+    <title>Scoreboard {{ competition_name }}</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fira+Sans:wght@400;700&display=swap">
+    {% raw %}
+    <link rel="stylesheet" href="{% static 'competition/css/style.css' %}">
+    {% endraw %}
+  </head>
+  <body>
+    <div class="content">
+      <h1 >Scoreboard {{ competition_name }}</h1>
+      <div>
+        <small id="last_fetched" data-epoch="{{ last_fetched_epoch }}">Last Fetched : {{ last_fetched }} GMT +7</small>
+      </div>
+      <div class="scoreboard">
+        <div class="row header">
+          <div class="col-rank">
+            <b>Rank</b>
+          </div>
+          <div class="col-name">
+            <b>Name</b>
+          </div>
+          <div class="col-from">
+            <b>From</b>
+          </div>
+          <div class="col-total-score">
+            <b>Score</b>
+          </div>
+          <div class="col-total-time">
+            <b>Time</b>
+          </div>
+          {% for p in problems.values() %}
+          <div class="col-prob-{{ p.code }}">
+            <a class="prob-link" href="{{ p.file }}" data-template="prob-stat-{{ p.code }}"><b>{{ p.code }}</b></a>
+          </div>
+          {% endfor %}
+        </div>
+        
+        {% for u in users %}
+        <div class="row">
+          <div class="col-rank">
+            {{ u.rank }}
+          </div>
+          <div class="col-name">
+            <div class="col-fullname">
+              {{ u.fullname }}
+            </div>
+            <div class="col-hacker">
+              <a href="https://www.hackerrank.com/{{ u.hackerrank }}" target="_blank"><small>{{ u.hackerrank }}</small></a>
+            </div>
+          </div>
+          <div class="col-from">
+            <div class="col-from-major">
+              {{ u.major }}
+            </div>
+            <div class="col-from-class">
+              <small>{{ u.class }}</small>
+            </div>
+          </div>
+          <div class="col-total-score">
+            {{ u.total_score }}
+          </div>
+          <div class="col-total-time">
+            {{ u.total_time }}
+          </div>
+          {% for p in problems.values() %}
+          {% set up = u.problems[p.slug] %}
+          <div class="col-prob-{{ p.code }} {{ up.status }}">
+            {% if up.status|length > 0 %}
+            <div class="col-max-score">
+              {{ up.max_score }}
+            </div>
+            <div class="col-max-score-time">
+              {{ up.max_score_time }}
+            </div>
+            <div class="col-penalty">
+              {{ up.penalty }}
+            </div>
+            {% endif %}
+          </div>
+          {% endfor %}
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+    <div style="display: none;">
+      {% for p in problems.values() %}
+      <div id="prob-stat-{{ p.code }}">
+        <table>
+          <tr>
+            <td><b>Problem</b></td>
+            <td>{{ p.name }}</td>
+          </tr>
+          <tr>
+            <td><b>First Solver</b></td>
+            <td>{{ p.r_first_solver }}</td>
+          </tr>
+          <tr>
+            <td><b># Solver</b></td>
+            <td>{{ p.r_count_of_solver }}</td>
+          </tr>
+          <tr>
+            <td><b># Submission</b></td>
+            <td>{{ p.count_of_submission }}</td>
+          </tr>
+        </table>
+      </div>
+      {% endfor %}
+    </div>
+    <script src="https://unpkg.com/@popperjs/core@2"></script>
+    <script src="https://unpkg.com/tippy.js@6"></script>
+    <script>
+      tippy('.prob-link', {
+        content(reference) {  
+          const id = reference.getAttribute('data-template');
+          const template = document.getElementById(id);
+          return template.innerHTML;
+        },
+        allowHTML: true,
+        maxWidth: 'none',
+        duration: 0,
+      });
+    </script>
+    <script>
+      const fetch_interval = 30; // 30 second
+      const el_epoch = document.querySelector('#last_fetched');
+      const last_fetch = parseInt(el_epoch.dataset.epoch); // second
+      const curr_epoch = Date.now() / 1000; // to second
+      const dur = Math.max(10, last_fetch + fetch_interval - curr_epoch); // second
+      setTimeout(() => location.reload(), dur * 1000); // millisecond
+    </script>
+  </body>
+</html>

@@ -1,0 +1,116 @@
+{% extends 'products/products.html' %} {% load static%}
+
+{% block sudoku %}
+	<section id="sudoku">
+        <div class="container align-center">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <h2 class="section-heading text-uppercase"> {{out16}} </h2>               
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12 text-center">
+					<a class="btn btn-outline-warning text-dark" href="{% url 'products16' %}">Build Sudoku</a>
+                </div>
+            </div>
+            <div class="row">
+				<div class="col-lg-12 text-center">
+                    <h4 class="section-heading text-uppercase">{{add}}</h4>
+					{% ifequal out16 'Solusi Sudoku:'%}
+                    <script>
+                        var mat = {{grid16|safe}};
+                        var mat_orig = {{grid_orig16|safe}};
+                        var maks = {{jumSol|safe}};
+                        var i,j,k;
+                        document.write('<table class="sd" id="sudo" border="0" align="center" cellspacing="1" cellpadding="1">');
+                        for(k = 0; k < maks; k++){
+                            for(i = 0; i < 16 ; i++){
+                                document.write('<tr>');
+                                if (i != 4 && i != 8 && i != 12){
+                                    for(j = 0; j < 16; j++){
+                                        if(j == 3 || j == 7 || j == 11){
+                                            if(mat[k][i][j] == mat_orig[i][j]){
+                                                document.write('<td class="rr"><font class="text-warning" size="5">'+mat[k][i][j]+'</font</td>');
+                                            }
+                                            else{
+                                                document.write('<td class="rr">'+mat[k][i][j]+'</td>');
+                                            }
+                                        }else{
+                                            if(mat[k][i][j] == mat_orig[i][j]){
+                                                document.write('<td class="xx"><font class="text-warning" size="5">'+mat[k][i][j]+'</font</td>');
+                                            }
+                                            else{
+                                                document.write('<td class="xx">'+mat[k][i][j]+'</td>');
+                                            }
+                                        }
+                                    }
+                                }else{
+                                    for(j = 0; j < 16; j++){
+                                        if(j == 3 || j == 7 || j== 11){
+                                            if(mat[k][i][j] == mat_orig[i][j]){
+                                                document.write('<td class="topr"><font class="text-warning" size="5">'+mat[k][i][j]+'</font</td>');
+                                            }else{
+                                                document.write('<td class="topr">'+mat[k][i][j]+'</td>');
+                                            }
+                                        }else{
+                                            if(mat[k][i][j] == mat_orig[i][j]){
+                                                document.write('<td class="top"><font class="text-warning" size="5">'+mat[k][i][j]+'</font</td>');
+                                            }
+                                            else{
+                                                document.write('<td class="top">'+mat[k][i][j]+'</td>');
+                                            }
+                                        }
+                                    }
+                                }
+                            document.write('</tr>');
+                            }
+                        }
+                        document.write('</table>');
+                    </script>
+                    {% endifequal %}
+                </div>
+			</div>
+		</div>
+	</section>
+{% endblock %}
+
+{% block myscript %}
+	<script type="text/javascript">
+
+		var $table = document.getElementById("sudo"),
+        // banyak baris
+        $n = 16,
+        $rowCount = $table.rows.length,
+        $firstRow = $table.rows[0].firstElementChild.tagName,
+        $hasHead = ($firstRow === "TH"),
+        $tr = [],
+        $i,$ii,$j = ($hasHead)?1:0,
+        $th = ($hasHead?$table.rows[(0)].outerHTML:"");
+        var $pageCount = Math.ceil($rowCount / $n);
+        if ($pageCount > 1) {
+            for ($i = $j,$ii = 0; $i < $rowCount; $i++, $ii++)
+                $tr[$ii] = $table.rows[$i].outerHTML;
+            $table.insertAdjacentHTML("afterend","<div id='buttons'></div");
+            sort(1);
+        }
+        
+        function sort($p) {
+            var $rows = $th,$s = (($n * $p)-$n);
+            for ($i = $s; $i < ($s+$n) && $i < $tr.length; $i++)
+                $rows += $tr[$i];
+                $table.innerHTML = $rows;
+            document.getElementById("buttons").innerHTML = pageButtons($pageCount,$p);
+            document.getElementById("id"+$p).setAttribute("class","active");
+        }
+
+        function pageButtons($pCount,$cur) {
+            var $prevDis = ($cur == 1)?"disabled":"",
+                $nextDis = ($cur == $pCount)?"disabled":"",
+                $buttons = "<input type='button' value='&lt;&lt; Prev' onclick='sort("+($cur - 1)+")' "+$prevDis+">";
+            for ($i=1; $i<=$pCount;$i++)
+                $buttons += "<input type='button' id='id"+$i+"'value='"+$i+"' onclick='sort("+$i+")'>";
+            $buttons += "<input type='button' value='Next &gt;&gt;' onclick='sort("+($cur + 1)+")' "+$nextDis+">";
+            return $buttons;
+        }
+	</script>
+{% endblock %}

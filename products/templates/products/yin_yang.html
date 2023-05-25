@@ -1,0 +1,271 @@
+{% load static %}
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" href="{% static 'products/yin-yang/mystyle.css' %}"/>
+    <script src="{% static 'products/yin-yang/jquery-3.6.0.min.js' %}"></script>
+    <title>Yin-Yang Solver</title>
+</head>
+<body>
+    <center><h1>Yin-Yang Solver</h1></center>
+    <form action="/products/answer-yin-yang/" method="get">
+        <div class="container">
+            <table class="rowColumnHandler">
+                <tr>
+                    <td></td>
+                    <td>ROW</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>COLUMN</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>
+                        <button type="button" onclick="deleteRow()" class="rowColButton"><</button>
+                    </td>
+                    <td>
+                        <div id="rowCounter" class="counter"><input type="hidden" name="row" value=3><label for="row">3</label></div>
+                    </td>
+                    <td>
+                        <button type="button" onclick="appendRow()" class="rowColButton">></button>
+                    </td>
+                    <td></td>
+                    <td>
+                        <button type="button" onclick="deleteColumn()" class="rowColButton"><</button>
+                    </td>
+                    <td>
+                        <div id="columnCounter" class="counter"><input type="hidden" name="column" value=3><label for="column">3</label></div>
+                    </td>
+                    <td>
+                        <button type="button" onclick="appendColumn()" class="rowColButton">></button>
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td><button type="button" onclick="clearBoard()" class="optionButton">Clear</button></td>
+                    <td></td>
+                    <td><button type="button" onclick="buildPuzzle()" class="buildButton">Build Puzzle</button></td>
+                    <td></td>
+                    <td><input type="submit" class="submitButton" value="Solve"></td>
+                    <td></td>
+                </tr>
+            </table>
+        </div>
+        <br>
+        <div class="container">
+            <table id="playboard">
+                <tr>
+                    <td><div class="cell"><button type="button" class="empty" onclick="cycleColor.call(this)"><input type="hidden" name="grid" value="*"></button></div></td>
+                    <td><div class="cell"><button type="button" class="empty" onclick="cycleColor.call(this)"><input type="hidden" name="grid" value="*"></button></div></td>
+                    <td><div class="cell"><button type="button" class="empty" onclick="cycleColor.call(this)"><input type="hidden" name="grid" value="*"></button></div></td>
+                </tr>
+                <tr>
+                    <td><div class="cell"><button type="button" class="empty" onclick="cycleColor.call(this)"><input type="hidden" name="grid" value="*"></button></div></td>
+                    <td><div class="cell"><button type="button" class="empty" onclick="cycleColor.call(this)"><input type="hidden" name="grid" value="*"></button></div></td>
+                    <td><div class="cell"><button type="button" class="empty" onclick="cycleColor.call(this)"><input type="hidden" name="grid" value="*"></button></div></td>
+                </tr>
+                <tr>
+                    <td><div class="cell"><button type="button" class="empty" onclick="cycleColor.call(this)"><input type="hidden" name="grid" value="*"></button></div></td>
+                    <td><div class="cell"><button type="button" class="empty" onclick="cycleColor.call(this)"><input type="hidden" name="grid" value="*"></button></div></td>
+                    <td><div class="cell"><button type="button" class="empty" onclick="cycleColor.call(this)"><input type="hidden" name="grid" value="*"></button></div></td>
+                </tr>
+                
+            </table>
+        </div>
+    </form>
+    <br>
+    <div class="container">
+        This is a Yin-Yang solver. A Yin-Yang puzzle follows two rules:
+        <ol>
+            <li>No 2 × 2 cells with the same colored circles</li>
+            <li>All colored circles must be Orthogonally adjacent to each other (no diagonal connection allowed)</li>
+        </ol>
+        Button Functionalities:
+        <ol>
+            <li>Row and Column: Adjust the number of rows and columns (max 10 × 10).</li>
+            <li>Cell: Click each cell to cycle from black circle, white circle, and empty.</li>
+            <li>Clear: Click to set all cells into empty cells.</li>
+            <li>Build Puzzle: Click to cycle from 5 predetermined puzzles you can solve. (Use Clear button to remove cell)</li>
+            <li>Solve: Click to solve an unfinished puzzle, or verify a finished puzzle.</li>
+        </ol>
+        *note: due to limitation, the program has 25 seconds time limit.
+    </div>
+</body>
+
+<script type="text/javascript">
+var variant = 4;
+
+function updateRowCounter(count) {
+    var rowCounter = document.getElementById('rowCounter');
+    rowCounter.children[0].value = count;
+    rowCounter.children[1].innerHTML = count;
+}
+
+function updateColumnCounter(count) {
+    var columnCounter = document.getElementById('columnCounter');
+    columnCounter.children[0].value = count;
+    columnCounter.children[1].innerHTML = count;
+}
+
+function createCell(cell, style) {
+    var div = document.createElement('div'),
+        btn = document.createElement('button'),
+        inp = document.createElement('input');
+    inp.value = "*"
+    inp.setAttribute('type','hidden');
+    inp.setAttribute('name','grid');
+    btn.appendChild(inp);
+    btn.setAttribute('type','button');
+    btn.setAttribute('class','empty');
+    btn.setAttribute('onclick','cycleColor.call(this)');
+    div.appendChild(btn);
+    div.setAttribute('class', style);
+    cell.appendChild(div);
+}
+
+function appendRow() {
+    var tbl = document.getElementById('playboard'),
+        i;
+    if(tbl.rows.length < 10) {
+        var row = tbl.insertRow(tbl.rows.length);
+        for (i = 0; i < tbl.rows[0].cells.length; i++) {
+            createCell(row.insertCell(i), 'cell');
+        }
+        updateRowCounter(tbl.rows.length);
+    }
+}
+
+function appendColumn() {
+    var tbl = document.getElementById('playboard'),
+        i;
+    if(tbl.rows[0].cells.length < 10){
+        for (i = 0; i < tbl.rows.length; i++) {
+            createCell(tbl.rows[i].insertCell(tbl.rows[i].cells.length), 'cell');
+        }
+        updateColumnCounter(tbl.rows[0].cells.length);
+    }
+}
+
+function deleteRow() {
+    var tbl = document.getElementById('playboard'),
+        lastRow = tbl.rows.length - 1
+    if (lastRow > 0) {
+        tbl.deleteRow(lastRow);
+        updateRowCounter(tbl.rows.length);
+    }
+}
+
+function deleteColumn() {
+    var tbl = document.getElementById('playboard'),
+        lastCol = tbl.rows[0].cells.length - 1,
+        i;
+    if (lastCol > 0) {
+        for (i = 0; i < tbl.rows.length; i++) {
+            tbl.rows[i].deleteCell(lastCol)
+        }
+        updateColumnCounter(tbl.rows[0].cells.length);
+    }
+}
+
+function cycleColor() {
+    switch ($(this).attr('class')){
+        case 'empty': $(this).removeClass('empty').addClass('black'); $(this).find('input').val(0); break;
+        case 'black': $(this).removeClass('black').addClass('white'); $(this).find('input').val(1); break;
+        case 'white': $(this).removeClass('white').addClass('empty'); $(this).find('input').val("*"); break;
+    }
+}
+
+function setSize(row,col) {
+    var tbl = document.getElementById('playboard');
+    while (tbl.rows.length != row) {
+        if (tbl.rows.length < row) {
+            appendRow();
+        } else {
+            deleteRow();
+        }
+    }
+    while (tbl.rows[0].cells.length != col) {
+        if (tbl.rows[0].cells.length < col) {
+            appendColumn();
+        } else {
+            deleteColumn();
+        }
+    }
+}
+
+function buildCell(row, col, color) {
+    var tbl = document.getElementById('playboard');
+    tbl.rows[row].cells[col].children[0].children[0].setAttribute('class',color);
+    tbl.rows[row].cells[col].children[0].children[0].setAttribute('onclick','');
+    if (color == 'black') {
+        tbl.rows[row].cells[col].children[0].children[0].children[0].value = 0;
+    } else {
+        tbl.rows[row].cells[col].children[0].children[0].children[0].value = 1;
+    }
+}
+
+function buildPuzzle() {
+    clearBoard();
+    // var variant = Math.floor(Math.random()*5);
+    variant++;
+    if (variant == 5) variant = 0;
+    switch (variant) {
+        case 0:
+            setSize(5,5);
+            buildCell(0,0,'white');
+            buildCell(0,1,'black');
+            buildCell(2,0,'black');
+            buildCell(2,1,'white');
+            buildCell(2,3,'black');
+            buildCell(2,4,'black');
+            buildCell(4,3,'black');
+            buildCell(4,4,'black');
+            break;
+        case 1:
+            setSize(4,4);
+            buildCell(0,2,'black');
+            buildCell(0,3,'black');
+            buildCell(2,1,'white');
+            buildCell(3,1,'black');
+            break;
+        case 2:
+            setSize(5,4);
+            buildCell(2,1,'black');
+            buildCell(2,2,'white');
+            buildCell(3,1,'white');
+            buildCell(4,0,'white');
+            buildCell(4,1,'black');
+            break;
+        case 3:
+            setSize(5,5);
+            buildCell(0,2,'black');
+            buildCell(2,2,'black');
+            buildCell(3,0,'black');
+            buildCell(4,0,'white');
+            buildCell(4,2,'black');
+            break;
+        case 4:
+            setSize(7,5);
+            buildCell(2,2,'black');
+            buildCell(3,1,'black');
+            buildCell(3,2,'black');
+            buildCell(3,3,'black');
+            buildCell(4,2,'black');
+            break;
+    }
+}
+
+function clearBoard() {
+    var tbl = document.getElementById('playboard'),
+        i, j;
+    for (i = 0; i < tbl.rows.length; i++) {
+        for (j = 0; j < tbl.rows[0].cells.length; j++) {
+            tbl.rows[i].cells[j].children[0].children[0].setAttribute('class','empty');
+            tbl.rows[i].cells[j].children[0].children[0].setAttribute('onclick','cycleColor.call(this)');
+            tbl.rows[i].cells[j].children[0].children[0].children[0].value = '*';
+        }
+    }
+}
+
+</script>
+</html>

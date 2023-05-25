@@ -1,0 +1,113 @@
+section#top-section {
+	background: url(../img/bg-top.png) no-repeat bottom center;
+}
+
+section#wedo{
+  padding: 100px 0px 30px 0px;
+}
+
+section#wedo img{
+  width: 65%;
+}
+
+section#wedo button{
+  padding-bottom: 10px;
+  padding-top: 10px;
+}
+
+section#sgbasic{
+  padding: 100px 0px 150px 0px;
+}
+section#sgbasic .card{
+  padding: 60px 0px;
+  border-radius: 15px 15px 15px 15px;
+  overflow: hidden;
+  box-shadow: 0 0px 40px 0px rgba(0, 0, 0, 0.15);
+  -moz-box-shadow: 0 0px 40px 0px rgba(0, 0, 0, 0.15);
+  -webkit-box-shadow: 0 0px 40px 0px rgba(0, 0, 0, 0.15);
+  -o-box-shadow: 0 0px 40px 0px rgba(0, 0, 0, 0.15);
+  -ms-box-shadow: 0 0px 40px 0px rgba(0, 0, 0, 0.15);
+}
+
+section#sgadvance .col-5{
+  padding: 0px 30px 0px 0px;
+}
+
+section#pelatihan{
+  padding: 100px 0px 50px 0px;
+}
+
+section#responsi{
+  padding: 80px 0px;
+}
+
+section#responsi img{
+  width: 50%;
+}
+
+section#python{
+  text-align: right;
+  padding: 40px 0px 100px 0px;
+  background: url(../img/head_1.png) no-repeat left;
+  background-size: 650px;
+}
+
+section#latex{
+  text-align: left;
+  padding: 50px 0px 100px 0px;
+  background: url(../img/head_2.png) no-repeat right;
+  background-size: 650px;
+}
+
+div#calendar iframe{
+  height: 600px;
+}
+
+@media (max-width: 768px){
+  section#top-section {
+    display: none;
+  }
+
+  section#sgbasic .card{
+    margin-bottom: 30px;
+  }
+
+  section#sgadvance .row#sga-ket{
+    display: none;
+  }
+
+  section#sgadvance .row#sga-logo .col-md-2{
+    padding: 20px 0px 20px 0px;
+  }
+
+  section#sgadvance .row#sga-logo .col-md-2 img{
+    width: 45%;
+  }
+
+  section#wedo img{
+    width: 100%;
+  }
+  section#pelatihan{
+    padding: 100px 50px 0px 50px;
+    margin-bottom: 0px;
+  }
+  section#python{
+    text-align: center;
+    background: none;
+    padding: 20px 0px 0px 0px;
+  }
+  section#python img{
+    display: none;
+  }
+  section#latex{
+    text-align: center;
+    background: none;
+    padding: 20px 0px 0px 0px;
+  }
+  section#latex img{
+    display: none;
+  }
+  section#responsi img{
+    width: 100%;
+  }
+}

@@ -1,0 +1,204 @@
+{% extends 'landing/base.html' %} 
+{% load static %}
+
+{% block css %}
+    <link rel="stylesheet" href="{% static 'recruitment/css/style.css' %}" type="text/css">
+{% endblock %}
+
+{% block js %}
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+<script>
+    MathJax = {
+        tex: {inlineMath: [['$', '$'], ['\\(', '\\)']]}
+    };
+</script>
+<script>
+  function showLoading() {
+    Swal.fire({
+        title: 'Please Wait',
+        text: '',
+        allowEscapeKey: false,
+        allowOutsideClick: false,
+        showConfirmButton: false,
+        onOpen: () => {
+          Swal.showLoading()
+        }
+    })
+  }
+
+  $('#submission').submit(function(e) {
+    e.preventDefault()
+
+    showLoading();
+
+    const data = $(this).serialize()
+
+    $.post('submit', data)
+      .done((res) => {
+        if (res == 'INTERNAL_ERROR') {
+          Swal.fire({
+            icon: 'error',
+            text: 'Internal Error'
+          })
+        } else if (res == 'WRONG_ANSWER') {
+          Swal.fire({
+            icon: 'error',
+            text: 'Solusi kamu salah!'
+          })
+        } else if (res == 'ERROR') {
+          Swal.fire({
+            icon: 'error',
+            text: 'Solusi kamu error!'
+          })
+        } else if (res == 'TIME_LIMIT_EXCEEDED') {
+          Swal.fire({
+            icon: 'error',
+            text: 'Solusi kamu runningnya kelamaan!'
+          })
+        } else {
+          var txt
+          if (res == 'ACCEPTED') {
+            txt = 'Selamat kamu lulus (^_^), pantau terus OA Computing Laboratory untuk info selanjutnya ya!'
+          } else if (res == 'REJECTED') {
+            txt = 'Maaf kamu tidak lulus (T_T), silahkan coba lagi tahun depan ya!'
+          }
+          Swal.fire({
+            icon: 'info',
+            html: txt
+          })
+        }
+      })
+      .fail((res) => {
+        Swal.close()
+        console.log(res)
+      })
+  })
+</script>
+{% endblock %}
+
+{% block content %}
+    <section id="top-section">
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <h2 class="section-heading text-uppercase">Let's Join Computing Laboratory Gen 7.0!</h2>
+                <!-- <h3 class="section-subheading">See the poster below for details</h3> -->
+            </div>
+        </div>
+    </section>
+
+    <section id="recruitment">
+        <div class="row">
+            <div class="col">
+                <div class="shadow p-4 mb-4 bg-white">
+                    <div class="problem-header mb-4">
+                        <h1>Selisih Terkecil</h1>
+                        <p>Time limit : 0.05 second</p>
+                    </div>
+                    <div class="problem-description mb-4">
+                        <p>Hai, sebelumnya kami ucapkan selamat karena sudah menyelesaikan tahap <i>internship</i> dan <i>interview</i> Computing Laboratory. Gimana udah penasaran sama hasilnya? Kalau udah kita pemanasan otak dulu yah sebentar hehe. Jadi buat ngelihat hasilnya kamu harus mengerjakan soal di bawah ini. <i>Goodluck!</i>
+                        </p>
+                        
+                        <p>Kamu diberikan sebuah array yang berisi $N$ buah bilangan bulat, tugas kamu adalah mencari selisih terkecil 2 buah bilangan bulat dari array tersebut dan mengoutputkannya.</p>
+                    </div>
+                    <div class="problem-constraint mb-4">
+                        <h5>Constraint :</h5>
+                        <p>$2 \leq N \leq 10^4$</p>
+                        <p>$-10^8 \leq N_i \leq 10^8$</p>
+                    </div>
+                    <div class="problem-input mb-4">
+                        <h5>Input Format :</h5>
+                        <p>
+                          Baris pertama berisi sebuah bilangan bulat $N$.
+                          <br/>
+                          Baris kedua berisi $N$ buah bilangan bulat.
+                        </p>
+                    </div>
+                    <div class="problem-output mb-4">
+                        <h5>Output Format :</h5>
+                        <p>Sebuah baris yang berisi sebuah bilangan bulat yang merupakan selisih terkecil seperti yang dijelaskan pada deskripsi soal.</p>
+                    </div>
+                    
+                    <div class="problem-sample mb-3">
+                        <h5>Sample Input  :</h5>
+                        <div class="bg-light pt-3 pl-3 pr-3 mb-4 rounded border">
+<pre>4
+10 1 2 999999
+</pre>
+                        </div>
+                        
+                        <h5>Sample Output  :</h5>
+                        <div class="bg-light pt-3 pl-3 pr-3 mb-4 rounded border">
+<pre>1</pre>
+                        </div>
+                    </div>
+                    
+                    <div class="problem-explanation pb-3">
+                        <h5>Explanation :</h5>
+                        <p>
+                          Selisih untuk setiap pasang 2 buah bilangan bulat pada array [10, 1, 2, 999999] dalam bentuk tabel :
+                        </p>
+                        <table class="table table-bordered">
+                          <thead class="thead-dark">
+                            <tr>
+                              <th>Angka Pertama</th>
+                              <th>Angka Kedua</th>
+                              <th>Selisih</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr>
+                              <td>10</td>
+                              <td>1</td>
+                              <td>9</td>
+                            </tr>
+                            <tr>
+                              <td>10</td>
+                              <td>2</td>
+                              <td>8</td>
+                            </tr>
+                            <tr>
+                              <td>10</td>
+                              <td>999999</td>
+                              <td>999989</td>
+                            </tr>
+                            <tr>
+                              <td>1</td>
+                              <td>2</td>
+                              <td>1</td>
+                            </tr>
+                            <tr>
+                              <td>1</td>
+                              <td>999999</td>
+                              <td>999998</td>
+                            </tr>
+                            <tr>
+                              <td>2</td>
+                              <td>999999</td>
+                              <td>999997</td>
+                            </tr>
+                          </tbody>
+                        </table>
+                        <p>Dapat dilihat bahwa selisih yang paling kecil adalah $1$ yang berasal dari pasangan ($1$, $2$) </p>
+                    </div>
+
+                    <form id="submission" method="POST" action="submit">
+                        {% csrf_token %} 
+                        <div class="solution-field mb-2">
+                          <textarea class="form-control" rows="8" id="solution" name="solution" placeholder="Tulis solusi kamu di sini dalam bahasa Python 3"></textarea>
+                        </div>
+                        <div class="input-group mb-2">
+                            <input type="text" class="form-control" id="nim" name="nim" placeholder="Masukkan NIM kamu" required>
+                            <div class="input-group-append">
+                              <button type="submit" class="btn btn-warning btn-block" name="submit">Submit</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    
+{% endblock %}

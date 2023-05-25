@@ -1,0 +1,102 @@
+*, ::after, ::before { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  background: #FAFAFA;
+}
+
+html { font-family: 'Fira Sans', sans-serif; }
+
+a { text-decoration: none; }
+
+.content { 
+  width: fit-content;
+  padding: 64px;
+}
+
+.scoreboard {
+  width: 2102px;
+  display: inline-block;
+  background: #FDFDFD;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  margin-top: 10px;
+}
+
+.row {
+  display: flex;
+  border: 1px solid #E0E0E0;
+  align-items: center;
+}
+
+.row > div {
+  padding: 20px;
+  margin: 10px;
+}
+
+.header {
+  position: sticky;
+  top: 0;
+  background: #FDFDFD;;
+}
+
+.col-rank {
+  flex: 0 0 80px;
+}
+
+.col-name {
+  flex: 0 0 250px;
+}
+
+.col-from {
+  flex: 0 0 150px;
+}
+
+.col-fullname {
+  font-weight: bold;
+}
+
+.col-solved {
+  flex: 0 0 100px;
+  text-align: center;
+}
+
+.col-total-time {
+  flex: 0 0 100px;
+}
+
+[class*="col-prob-"] {
+  flex: 0 0 90px;
+  text-align: center;
+}
+
+.ac { background: #60e760; }
+
+.fs { background: #1daa1d !important; }
+
+.not-ac { background: #e87272; }
+
+.pending { background: #7c7cfd !important; }
+
+.not-try { }
+
+.col-attempt {
+  /* font-weight: thicker; */
+  padding-bottom: 10px;
+
+}
+
+.col-max-score {
+  /* font-weight: thicker; */
+  padding-bottom: 10px;
+
+}
+
+.col-max-score-time {
+  /* font-weight: thicker; */
+  padding-bottom: 10px;
+}
+
+.col-penalty {
+  /* font-weight: thicker; */
+  padding-bottom: 0;
+}

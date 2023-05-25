@@ -1,0 +1,239 @@
+{% extends 'products/products.html' %} {% load static %}
+
+{% block sudoku %}
+    <section id="sudoku">
+        <div class="container align-center">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <h2 class="section-heading text-uppercase">Sudoku</h2>
+                    <h3 class="section-subheading text-muted">made by one of our members</h3>                  
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    {% comment %} <button class="btn btn-outline-dark" onclick="window.location.href={% url 'products4' %}">Sudoku 4X4</button>
+                    <button id="tes" class="btn btn-warning" onclick="reply_click(this.id)">Build Sudoku</button>
+					<button class="btn btn-outline-dark" onclick="window.location.href={% url 'products' %}">Sudoku 9X9</button> {% endcomment %}
+					<a href="{% url 'products4' %}" class="btn btn-outline-dark">Sudoku 4x4</a>
+                    <button id="tes" class="btn btn-warning" onclick="reply_click(this.id)">Build Sudoku</button>
+                    <a href="{% url 'products' %}" class="btn btn-outline-dark">Sudoku 9x9</a>
+                    
+				</div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <form action="/products/answer16/" method="get">
+                        <script>
+                            var i,j;
+                            document.write('<table class="sd" border="0" align="center" cellspacing="1" cellpadding="1">');
+                            for(i=0;i<16;i++){
+                                document.write('<tr>');
+                                if (i != 4 && i != 8 && i != 12){
+                                    for(j = 0; j < 16; j++){
+                                        if (j == 3 || j == 7 || j == 11){
+                                            document.write('<td class="rr">'+'<input id='+(i*16+(j+1))+' class="big" name="grid" maxlength="2">'+'</td>');
+
+                                        }else{
+                                                document.write('<td class="xx">'+'<input id='+(i*16+(j+1))+' class="big" name="grid" maxlength="2">'+'</td>');
+                                        }
+                                    }
+                                }else{
+                                    for(j = 0;j < 16;j++){
+                                        if(j == 3 || j == 7 || j == 11){
+                                                document.write('<td class="topr">'+'<input id='+(i*16+(j+1))+' class="big" name="grid" maxlength="2">'+'</td>');
+                                        }else{
+                                                document.write('<td class="top">'+'<input id='+(i*16+(j+1))+' class="big" name="grid" maxlength="2">'+'</td>');
+
+                                        }
+                                    }
+                                }
+                                document.write('</tr>');
+                            }
+                        </script>
+                        </table>
+                        <br>
+                        <center>
+                            <button type="reset" value="Reset" id="reset" class="btn btn-secondary" onclick="reply_click(this.id)">Reset</button>
+                            <input type="submit" class="btn btn-outline-success" value="Solve">
+                        </center>
+                        </form>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}
+
+{% block myscript %}
+    <script type="text/javascript">
+        function reply_click(clicked_id){
+            if(clicked_id == "tes"){
+				document.getElementById(4).value = 9;
+				document.getElementById(10).value = 3;
+				document.getElementById(16).value = 2;
+				document.getElementById(21).value = 15;
+				document.getElementById(24).value = 12;
+				document.getElementById(25).value = 16;
+				document.getElementById(30).value = 10;
+				document.getElementById(32).value = 8;
+				document.getElementById(34).value = 4;
+				document.getElementById(36).value = 5;
+				document.getElementById(42).value = 9;
+				document.getElementById(56).value = 10;
+				document.getElementById(59).value = 13;
+				document.getElementById(64).value = 15;
+				document.getElementById(67).value = 8;
+				document.getElementById(80).value = 16;
+				document.getElementById(86).value = 5;
+				document.getElementById(97).value = 10;
+				document.getElementById(99).value = 15;
+				document.getElementById(112).value = 12;
+				document.getElementById(118).value = 13;
+				document.getElementById(119).value = 9;
+				document.getElementById(122).value = 4;
+				document.getElementById(127).value = 7;
+				document.getElementById(133).value = 16;
+				document.getElementById(136).value = 14;
+				document.getElementById(146).value = 5;
+				document.getElementById(148).value = 4;
+				document.getElementById(154).value = 7;
+				document.getElementById(156).value = 11;
+				document.getElementById(157).value = 1;
+				document.getElementById(158).value = 13;
+				document.getElementById(159).value = 9;
+				document.getElementById(164).value = 3;
+				document.getElementById(170).value = 1;
+				document.getElementById(173).value = 5;
+				document.getElementById(175).value = 4;
+				document.getElementById(181).value = 10;
+				document.getElementById(184).value = 15;
+				document.getElementById(193).value = 15;
+				document.getElementById(195).value = 16;
+				document.getElementById(201).value = 8;
+				document.getElementById(203).value = 10;
+				document.getElementById(208).value = 14;
+				document.getElementById(214).value = 1;
+				document.getElementById(215).value = 4;
+				document.getElementById(221).value = 2;
+				document.getElementById(223).value = 5;
+				document.getElementById(225).value = 8;
+				document.getElementById(233).value = 12;
+				document.getElementById(235).value = 16;
+				document.getElementById(246).value = 9;
+				document.getElementById(247).value = 7;
+				document.getElementById(248).value = 3;
+				document.getElementById(255).value = 1;
+				document.getElementById(4).readOnly = true;
+				document.getElementById(10).readOnly = true;
+				document.getElementById(16).readOnly = true;
+				document.getElementById(21).readOnly = true;
+				document.getElementById(24).readOnly = true;
+				document.getElementById(25).readOnly = true;
+				document.getElementById(30).readOnly = true;
+				document.getElementById(32).readOnly = true;
+				document.getElementById(34).readOnly = true;
+				document.getElementById(36).readOnly = true;
+				document.getElementById(42).readOnly = true;
+				document.getElementById(56).readOnly = true;
+				document.getElementById(59).readOnly = true;
+				document.getElementById(64).readOnly = true;
+				document.getElementById(67).readOnly = true;
+				document.getElementById(80).readOnly = true;
+				document.getElementById(86).readOnly = true;
+				document.getElementById(97).readOnly = true;
+				document.getElementById(99).readOnly = true;
+				document.getElementById(112).readOnly = true;
+				document.getElementById(118).readOnly = true;
+				document.getElementById(119).readOnly = true;
+				document.getElementById(122).readOnly = true;
+				document.getElementById(127).readOnly = true;
+				document.getElementById(133).readOnly = true;
+				document.getElementById(136).readOnly = true;
+				document.getElementById(146).readOnly = true;
+				document.getElementById(148).readOnly = true;
+				document.getElementById(154).readOnly = true;
+				document.getElementById(156).readOnly = true;
+				document.getElementById(157).readOnly = true;
+				document.getElementById(158).readOnly = true;
+				document.getElementById(159).readOnly = true;
+				document.getElementById(164).readOnly = true;
+				document.getElementById(170).readOnly = true;
+				document.getElementById(173).readOnly = true;
+				document.getElementById(175).readOnly = true;
+				document.getElementById(181).readOnly = true;
+				document.getElementById(184).readOnly = true;
+				document.getElementById(193).readOnly = true;
+				document.getElementById(195).readOnly = true;
+				document.getElementById(201).readOnly = true;
+				document.getElementById(203).readOnly = true;
+				document.getElementById(208).readOnly = true;
+				document.getElementById(214).readOnly = true;
+				document.getElementById(215).readOnly = true;
+				document.getElementById(221).readOnly = true;
+				document.getElementById(223).readOnly = true;
+				document.getElementById(225).readOnly = true;
+				document.getElementById(233).readOnly = true;
+				document.getElementById(235).readOnly = true;
+				document.getElementById(246).readOnly = true;
+				document.getElementById(247).readOnly = true;
+				document.getElementById(248).readOnly = true;
+				document.getElementById(255).readOnly = true;
+        }if(clicked_id == "reset"){
+				document.getElementById(4).readOnly = false;
+				document.getElementById(10).readOnly = false;
+				document.getElementById(16).readOnly = false;
+				document.getElementById(21).readOnly = false;
+				document.getElementById(24).readOnly = false;
+				document.getElementById(25).readOnly = false;
+				document.getElementById(30).readOnly = false;
+				document.getElementById(32).readOnly = false;
+				document.getElementById(34).readOnly = false;
+				document.getElementById(36).readOnly = false;
+				document.getElementById(42).readOnly = false;
+				document.getElementById(56).readOnly = false;
+				document.getElementById(59).readOnly = false;
+				document.getElementById(64).readOnly = false;
+				document.getElementById(67).readOnly = false;
+				document.getElementById(80).readOnly = false;
+				document.getElementById(86).readOnly = false;
+				document.getElementById(97).readOnly = false;
+				document.getElementById(99).readOnly = false;
+				document.getElementById(112).readOnly = false;
+				document.getElementById(118).readOnly = false;
+				document.getElementById(119).readOnly = false;
+				document.getElementById(122).readOnly = false;
+				document.getElementById(127).readOnly = false;
+				document.getElementById(133).readOnly = false;
+				document.getElementById(136).readOnly = false;
+				document.getElementById(146).readOnly = false;
+				document.getElementById(148).readOnly = false;
+				document.getElementById(154).readOnly = false;
+				document.getElementById(156).readOnly = false;
+				document.getElementById(157).readOnly = false;
+				document.getElementById(158).readOnly = false;
+				document.getElementById(159).readOnly = false;
+				document.getElementById(164).readOnly = false;
+				document.getElementById(170).readOnly = false;
+				document.getElementById(173).readOnly = false;
+				document.getElementById(175).readOnly = false;
+				document.getElementById(181).readOnly = false;
+				document.getElementById(184).readOnly = false;
+				document.getElementById(193).readOnly = false;
+				document.getElementById(195).readOnly = false;
+				document.getElementById(201).readOnly = false;
+				document.getElementById(203).readOnly = false;
+				document.getElementById(208).readOnly = false;
+				document.getElementById(214).readOnly = false;
+				document.getElementById(215).readOnly = false;
+				document.getElementById(221).readOnly = false;
+				document.getElementById(223).readOnly = false;
+				document.getElementById(225).readOnly = false;
+				document.getElementById(233).readOnly = false;
+				document.getElementById(235).readOnly = false;
+				document.getElementById(246).readOnly = false;
+				document.getElementById(247).readOnly = false;
+				document.getElementById(248).readOnly = false;
+				document.getElementById(255).readOnly = false;
+			}
+        }
+    </script>
+{% endblock %}

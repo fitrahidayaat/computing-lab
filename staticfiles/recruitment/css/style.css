@@ -1,0 +1,34 @@
+section#top-section{
+    background: #212529;
+    padding: 200px 100px 100px 0px;
+    margin-left: 0px;
+    margin-right: 0px;
+}
+
+section#requirements{
+    padding: 100px 90px 20px 90px;
+}
+
+section#requirements h3{
+    color: #ffcc33;
+}
+
+section#recruitment{
+    padding: 100px 20px 50px 20px;
+}
+section#recruitment h3.section-subheading{
+    margin-bottom: 30px;
+}
+
+section#timeline-rec{
+    padding: 100px 10px 90px 10px;
+}
+
+@media (max-width: 411px){
+    section#top-section{
+        display: none;
+    }
+    section#requirements .col-lg-12{
+        text-align: center;
+    }
+}

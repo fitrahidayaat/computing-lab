@@ -1,0 +1,111 @@
+{% extends 'landing/base.html' %} 
+{% load static %}
+
+{% block css %}
+    <link rel="stylesheet" href="{% static 'products/css/style.css' %}" type="text/css">
+{% endblock %}
+
+{% block content %}
+
+    {% block sudoku %}
+    {% endblock %}
+
+    <section id="videos">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 text-center">
+                    <h2 class="section-heading text-uppercase"> Learning Videos </h2>
+                    <h3 class="section-subheading text-muted">videos made by our members for School of Computing students</h3>
+                </div>
+                <div class="col-md-6 text-center">
+                    <h5 class="text-uppercase"> Data Structure </h5>
+                    <iframe width="100%" height="345" src="https://www.youtube.com/embed/videoseries?list=PL9ZP7O0BtLhHHZNCTTsz0Ve2E3u2eB9rV" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                </div>
+                <div class="col-md-6 text-center">
+                    <h5 class="text-uppercase"> Design & Analysis of Algorithm </h5>
+                    <iframe width="100%" height="345" src="https://www.youtube.com/embed/videoseries?list=PL9ZP7O0BtLhEOzHDyvB5Hh-RqAhLDHudX" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    <!-- <img class="img-fluid d-block mx-auto" src="{% static 'aboutus/img/computing1.png' %}" style="width: 50%;">
+                    <h2 class="text-muted text-uppercase">Coming Soon</h2> -->
+                </div>
+            </div>
+        </div>  
+    </section>
+
+    <section id="path-finder">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 text-center">
+                    <h2 class="section-heading text-uppercase"> Study Group Basic Products </h2>
+                    <h3 class="section-subheading text-muted">made by our members</h3>
+                </div>
+                <div class="row mb-5">
+                    <div class="col-lg-6">
+                        <img class="img-fluid d-block mx-auto h-auto" src="{% static 'products/img/path-finder-preview.png' %}">
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="sgb-product-body">
+                            <h2>Path Finder</h2>
+                            <p class="text-muted">Visualizing how the Bread First Search Algorithm works.</p>
+                            <ul class="mb-5">
+                                Created by :
+                                <li>Armadhani Hiro</li>
+                                <li>Butrahandisya</li>
+                                <li>M Tsaqif Ammar</li>
+                                <li>M Faiz Abdurrahman</li>
+                            </ul>
+                            <a class="btn btn-outline-success" href="{% static 'products/path-finder.html' %}" onclick="window.open(this.href, 'path-finder', 'location = no, titlebar = no, toolbar = no, status = no, menubar = no, width='+ window.outerWidth +', height='+ window.outerHeight + ''); return false;">Try it</a>
+                            
+                        </div>
+                    </div>
+                </div>
+                <div class="row mb-5">
+                    <div class="col-lg-6">
+                        <img class="img-fluid d-block mx-auto h-auto" src="{% static 'products/img/tic-tac-toe-preview.png' %}">
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="sgb-product-body">
+                            <h2>Tic Tac Toe</h2>
+                            <p class="text-muted">A 3x3 Tic Tac Toe game that requires strategy, tactics, and observation to win.</p>
+                            <ul class="mb-5">
+                                Created by :
+                                <li>M Ilham Mubarak</li>
+                                <li>M Naufal Mizan Saputro</li>
+                                <li>I G.A Intro Savitri</li>
+                                <li>Artisa Bunga Syahputri</li>
+                            </ul>
+                            <a class="btn btn-outline-success" href="{% static 'products/tic-tac-toe.html' %}" onclick="window.open(this.href, 'tic-tac-toe', 'location = no, titlebar = no, toolbar = no, status = no, menubar = no, width='+ window.outerWidth +', height='+ window.outerHeight + ''); return false;">Try it</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mb-5">
+                    <div class="col-lg-6">
+                        <img class="img-fluid d-block mx-auto h-auto" src="{% static 'products/img/snake-and-ladder-preview.png' %}">
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="sgb-product-body">
+                            <h2>Snake and Ladder</h2>
+                            <p class="text-muted">A Snake and Ladder board game written in python.</p>
+                            <ul class="mb-5">
+                                Created by :
+                                <li>M Farhan Akbar</li>
+                                <li>M Rizqi Ramadhan</li>
+                                <li>M Ridho</li>
+                                <li>Naufal Rezky Ananda</li>
+                                <li>Restu Aditya Rachman</li>
+                            </ul>
+                            <a class="btn btn-outline-success" href="{% static 'products/snake-and-ladder.py' %}" onclick="window.open(this.href, 'snake-and-ladder'); return false;">View the code</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>  
+    </section>
+    {% block myscript %}
+    {% endblock %}
+
+    </html>
+
+{% endblock %}
+
+{% block js %}
+{% endblock %}

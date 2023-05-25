@@ -1,0 +1,72 @@
+{% load static %}
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" href="{% static 'products/yin-yang/mystyle.css' %}"/>
+    <title>Yin-Yang Solver</title>
+</head>
+<body>
+    <center><h1>Yin-Yang Solver</h1></center>
+    <div class="container">
+        <center>
+            {% if indicator == "T" %}
+            <h2 class="true">{{result}}</h2>
+            {% else %}
+            <h2 class="false">{{result}}</h2>
+            {% endif %}
+        </center>
+        <div class="container">
+            {% if solution != "[]" %}
+            <script>
+                var pb_ori = {{instance|safe}};
+                var pb_sol = {{solution|safe}};
+                var i,j;
+                document.write(`<table id="playboard">`);
+                for (i=0;i<pb_ori.length;i++){
+                    document.write(`<tr>`);
+                    for (j=0;j<pb_ori[0].length;j++){
+                        if(pb_ori[i][j] == '*'){
+                            if(pb_sol[i][j] == 0){
+                                document.write(`<td><div class="cell"><button type="button" class="blackSolve"></button></div></td>`);
+                            } else {
+                                document.write(`<td><div class="cell"><button type="button" class="whiteSolve"></button></div></td>`);
+                            }
+                        } else {
+                            if(pb_ori[i][j] == 0){
+                                document.write(`<td><div class="cell"><button type="button" class="black"></button></div></td>`);
+                            } else {
+                                document.write(`<td><div class="cell"><button type="button" class="white"></button></div></td>`);
+                            }
+                        }
+                    }
+                    document.write(`</tr>`);
+                }
+                document.write(`</table>`);
+            </script>
+            {% else %}
+            <script>
+                var pb_ori = {{instance|safe}};
+                var i,j;
+                document.write(`<table id="playboard">`);
+                for (i=0;i<pb_ori.length;i++){
+                    document.write(`<tr>`);
+                    for (j=0;j<pb_ori[0].length;j++){
+                        if(pb_ori[i][j]==0){
+                            document.write(`<td><div class="cell"><button type="button" class="black"></button></div></td>`);
+                        } else if (pb_ori[i][j]==1) {
+                            document.write(`<td><div class="cell"><button type="button" class="white"></button></div></td>`);
+                        } else {
+                            document.write(`<td><div class="cell"><button type="button" class="emptySolve"></button></div></td>`);
+                        }
+                    }
+                    document.write(`</tr>`);
+                }
+                document.write(`</table>`);
+            </script>
+            {% endif %}
+        </div>
+    </div>
+    <form action="/products/yin-yang" method="get">
+        <center><input type="submit" class="buildButton" value="Return"></center>
+    </form>
+</body>
+</html>

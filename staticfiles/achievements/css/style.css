@@ -1,0 +1,29 @@
+section#top-section {
+  padding: 150px 0px 50px 0px;
+  background: #212529;
+}
+
+section#top-section .section-heading {
+  font-size: 50px;
+  font-family: 'Raleway',sans-serif;
+  color: white;
+}
+
+section#top-section .section-subheading {
+  margin-bottom: 20px;
+  color: silver;
+}
+
+section#ach{
+  padding: 70px 0px;
+}
+
+section#ach .row#bgk{
+  padding: 50px 0px;
+}
+
+@media (max-width: 768px){
+  section#top-section {
+    padding: 70px 0px 50px 0px;
+  }
+}

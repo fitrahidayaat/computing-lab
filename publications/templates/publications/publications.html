@@ -1,0 +1,80 @@
+{% extends 'landing/base.html' %} 
+{% load static %}
+
+{% block css %}
+    <link rel="stylesheet" href="{% static 'publications/css/style.css' %}" type="text/css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.1/css/bootstrap.css" type="text/css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css" type="text/css">
+{% endblock %}
+
+{% block js %}
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
+     <script type="text/javascript" src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#pubs').DataTable( {
+                responsive: {
+                    details: {
+                        type: 'column',
+                        target: 'tr'
+                    }
+                },
+                columnDefs: [ {
+                    className: 'control',
+                    orderable: false,
+                    targets: 1
+                } ],
+                "autoWidth": true,
+                order: [ 3, 'desc' ],
+                "scrollX": false
+            });
+        });
+    </script>
+{% endblock %}
+
+{% block content %}
+    <section id="top-section">
+    </section>
+
+    <!-- publications -->
+    <section id="publications">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 text-center">
+                    <h2 class="section-heading text-uppercase">Publications</h2>
+                    <h3 class="section-subheading text-muted">list of publications made by our members</h3>
+                </div>
+            </div> 
+            <div class="row">
+                <div class="col-md-12 table-responsive">
+                    <table id="pubs" class="table table-hover ">
+                        <thead>
+                            <tr>
+                                <th>Title</th>
+                                <th>Author</th>
+                                <th>Publisher</th>
+                                <th>Year of Publication</th>
+                                <th>Link</th>
+                                <th>Abstract</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        {% for publication in publications %}
+                            <tr>
+                                <td>{{publication.title}}</td>
+                                <td>{{publication.author}}</td>
+                                <td>{{publication.publisher}}</td>
+                                <td>{{publication.year}}</td>
+                                <td><a href="{{publication.link}}" class="btn btn-warning" role="button"><i class="fas fa-file"></i></a></td>
+                                <td><p align="justify">{{publication.abstract|safe}}</p></td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+      </section>
+{% endblock %}

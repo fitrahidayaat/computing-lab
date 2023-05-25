@@ -1,0 +1,47 @@
+def get_participants():
+    raw = [
+        'muhammadrezaadi|M Reza Adi Nugraha|IF-44-05|Informatika',
+        'abdul_adf|Abdul Daffa Fakhrudin|IF-44-11|Informatika',
+        'naufalhawarden|Muhammad Naufal Hawari|IF-45-01|Informatika',
+        'azisa6980|Abdul Azis Al Ayubbi|IF-45-04|Informatika',
+        '0xabd|Nizam Abdullah|IF-45-10|Informatika',
+        'khusyasy|Muhammad Luthfi Khusyasy|IF-45-11|Informatika',
+        'luthfinovra|Luthfi Novra|IF-45-12|Informatika',
+        'victornotfxtrot|NATHAN DAVA ARKANANTA|IF-46-02|Informatika',
+        'elexyatama|Alexander Raditya Nugrahatama|IF-46-03|Informatika',
+        'shafaprmdna2409|muhammad shafa praramadhana|IF-46-06|Informatika',
+        'mkhoirulutfansy1|Mochammad Khoirullutfansyah|IF-46-07|Informatika',
+        'radhofanazizi|Radhofan Azizi Ramdhani|IF-46-09|Informatika',
+        'alifwide|ALIF WIDE ARDIANSYAH|IF-46-12|Informatika',
+        'alipwide|ALIF WIDE ARDIANSYAH|IF-46-12|Informatika',
+        'jasonhsitorus|Jason Hasudungan Sitorus|IF-45-03|Informatika',
+        'adinugraha|Adinugraha Dharmaputra|IF-44-12|Informatika',
+        'Yohanes_Januar|Yohanes Januarico Andiawan|IF-46-05|Informatika',
+        'laudadraka|Lauda Dhia Raka|IF-46-11|Informatika',
+        'Arrasheed43|Valent Fauzan Al Rasyid|IF-45-08|Informatika',
+        'raflymg02|Rafly Muhammad Ghifari|IF-45-02|Informatika',
+        'brianashari18|Brian Anashari|IF-46-03|Informatika',
+        'Acierz|Rayhan Risq Arya Brinanta|IF-44-09|Informatika',
+        'pepsimanps4|Ryan Oktaviandi Susilo Wibowo|IF-44-09|Informatika',
+        'raflisusanto|Muhamad Rafli Susanto|IF-44-07|Informatika',
+        'jayadiningrat201|Aria Reyhan Jayadiningrat|IF-44-07|Informatika',
+        '-|Hidayat Taufiqur Rahmah Achmad |IF-44-07 |Informatika',
+        'Kurorin|Putri Nabila|IF-44-04|Informatika',
+        'nothansel|Hansel Adriel Abiesha|IF-46-01|Informatika',
+        'GibranZ14|Gibran Shevaldo|IF-45-02|Informatika',
+        '-|Hendrawan aulia rahman|IF-44-02|Informatika',
+        'bagaz|Bagas Mukti Wibowo|IF-45-09|Informatika',
+        '-|Andi Muhammad Naufal|IF-46-10|Informatika',
+        'miftahghafar1|Miftah Ghafar Dipawinangun||Informatika',
+        'fassabilf|Faiz Assabil Firdaus |IF-46-08|Informatika',
+        'mn33qwc|Teuku Ahmad Fattan Muayyad Syah|IF-46-08|Informatika',
+    ]
+    return [
+        {
+            'hackerrank': p[0],
+            'name': p[1],
+            'class': p[2],
+            'major': p[3],
+        }
+        for p in [r.split('|') for r in raw]
+    ]
